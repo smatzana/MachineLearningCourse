@@ -19,8 +19,13 @@ grad = zeros(size(theta));
 
 
 
-
-
+hypothesis=sigmoid(X * theta); % 100 x 1
+part1=-(log(hypothesis).* y);
+part2=(-y.+1).*log((-hypothesis).+1); % 100 * 1
+smallTheta=theta(2:1:end);
+J=sum(part1-part2)/m + (lambda/(2*m))*(sum(smallTheta.*smallTheta));
+bigTheta=[0;smallTheta];
+grad=(1/m)*((sigmoid(X*theta) .- y)' * X )' + (lambda/m)*bigTheta;
 
 % =============================================================
 

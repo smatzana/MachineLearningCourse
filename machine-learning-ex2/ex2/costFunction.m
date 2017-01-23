@@ -27,12 +27,7 @@ part1=-(log(hypothesis).* y);
 part2=(-y.+1).*log((-hypothesis).+1); % 100 * 1
 J=sum(part1-part2)/m;
 
-theta0 = (1/m)*( (sigmoid(X*theta) .- y)' * X(:, 1));
-theta1 = (1/m)*( (sigmoid(X*theta) .- y)' * X(:, 2));
-theta2 = (1/m)*( (sigmoid(X*theta) .- y)' * X(:, 3));
-grad = [theta0; theta1; theta2];
-
-hypothesis.-y; % 100 * 1
+grad=(1/m)*((sigmoid(X*theta) .- y)' * X )';
 
 % =============================================================
 
