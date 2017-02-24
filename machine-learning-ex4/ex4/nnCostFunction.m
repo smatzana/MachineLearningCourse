@@ -78,16 +78,31 @@ x2=sum(sum(Theta2(:,2:end).*Theta2(:,2:end),2),1);
 J=J/m + lambda*((x1+x2)/(2*m));
 
 
+% Part 2
+BigDelta1 = zeros(size(Theta1));
+BigDelta2 = zeros(size(Theta2));
+for sample = 1:m
 
+  % Step 1
+  yVector = zeros(num_labels, 1);
+  yVector(y(sample)) = 1;
+  a1 = [1, X(sample, :)];
+  z2 = Theta1 * a1';
+  a2 = [1; sigmoid(z2)];
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+  % Step 2
+  delta3 = a3 .- yVector;
 
+  % Step 3
+  delta2 = Theta2(:,2:end)' * delta3 .* sigmoidGradient(z2);
+  BigDelta2 = BigDelta2 + delta3 * a2';
+  BigDelta1 = BigDelta1 + delta2 * a1;
 
+end
 
-
-
-
-
-
-
+Theta1_grad=BigDelta1 ./ m;
+Theta2_grad=BigDelta2 ./ m;
 
 
 
