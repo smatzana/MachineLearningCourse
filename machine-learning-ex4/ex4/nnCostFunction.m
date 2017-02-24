@@ -62,9 +62,16 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-
-
-
+for sample = 1:m
+  yVector = zeros(num_labels, 1);
+  yVector(y(sample)) = 1;
+  layer1Out = [1; sigmoid(Theta1 * [1, X(sample, :)]')];
+  hypothesis = sigmoid(Theta2 * layer1Out);
+  part1=-(log(hypothesis).* yVector);
+  part2=(-yVector.+1).*log((-hypothesis).+1);
+  J+=sum(part1-part2);
+end
+J=J/m;
 
 
 
