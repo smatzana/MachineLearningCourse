@@ -62,6 +62,7 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+regularizationPartial=0;
 for sample = 1:m
   yVector = zeros(num_labels, 1);
   yVector(y(sample)) = 1;
@@ -71,7 +72,10 @@ for sample = 1:m
   part2=(-yVector.+1).*log((-hypothesis).+1);
   J+=sum(part1-part2);
 end
-J=J/m;
+x1=sum(sum(Theta1(:,2:end).*Theta1(:,2:end),2),1);
+x2=sum(sum(Theta2(:,2:end).*Theta2(:,2:end),2),1);
+
+J=J/m + lambda*((x1+x2)/(2*m));
 
 
 
