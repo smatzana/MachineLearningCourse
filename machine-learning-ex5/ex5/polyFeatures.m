@@ -15,8 +15,12 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
-
-
+Xorig=X;
+X_poly(:, 1) = X;
+for i=2:p
+  lastP=X_poly(:,[i-1]);
+  X_poly(:, i) = X.*lastP;
+end
 
 
 
