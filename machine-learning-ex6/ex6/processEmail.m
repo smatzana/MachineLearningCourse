@@ -97,14 +97,15 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-
-
-
-
-
-
-
-
+    n = 1899;
+    for idx = 1:n
+      dictWord = vocabList{idx};
+      if  strcmp(dictWord, str) == 1
+        word_indices = [word_indices ; idx];
+        break;
+      end
+    end
+     
 
     % =============================================================
 
