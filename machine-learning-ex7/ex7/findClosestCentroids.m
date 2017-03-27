@@ -10,6 +10,7 @@ K = size(centroids, 1);
 
 % You need to return the following variables correctly.
 idx = zeros(size(X,1), 1);
+dim = size(X, 2);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Go over every example, find its closest centroid, and store
@@ -21,7 +22,19 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
+for ex = 1:size(X, 1)
+  example = X(ex, :);
+  cost = realmax;
+  for k = 1:K
+    centroidK = centroids(k, :);
+    m = example .- centroidK;
+    d = sum(m .* m);
+    if d <= cost
+      cost = d;
+      idx(ex) = k;
+    end
+  end
+end
 
 
 
